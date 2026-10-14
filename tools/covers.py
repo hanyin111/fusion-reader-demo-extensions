@@ -1,11 +1,12 @@
 from pathlib import Path
+import sys
 from PIL import Image, ImageDraw, ImageFont
 
 root = Path(__file__).resolve().parents[1]
-font_path = root.parents[2] / 'assets/fonts/HarmonyOS_Sans_SC_Regular.ttf'
-if not font_path.is_file():
-    candidates = list((root.parents[2] / 'assets/fonts').glob('*Harmony*'))
-    font_path = next(p for p in candidates if p.suffix in ('.ttf', '.otf'))
+if len(sys.argv) != 2:
+    raise SystemExit('Usage: python tools/covers.py <local-font-file>')
+font_path = Path(sys.argv[1])
+if not font_path.is_file(): raise SystemExit('The supplied local font does not exist.')
 out = root / 'public/covers'
 out.mkdir(parents=True, exist_ok=True)
 for index, (key, title) in enumerate([('letter', '山间来信'), ('paper', '纸上旅行'), ('morning', '晨光札记')]):

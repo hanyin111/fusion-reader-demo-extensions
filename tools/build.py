@@ -17,5 +17,6 @@ manifest = dict(schemaVersion=1, name='聚阅原创演示仓库',
                 website='https://hanyin111.github.io/fusion-reader-demo-extensions/', extensions=[entry])
 (out / 'index.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 shutil.copytree(root / 'public', out, dirs_exist_ok=True)
+shutil.copy2(root / 'LICENSE', out / 'LICENSE')
 (out / '.nojekyll').touch()
 print('Built one demo source, three original novels, nine chapters.')
